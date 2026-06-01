@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # Sesuaikan dengan nama branch utama Anda (main atau master)
+      - main
 
 permissions:
   contents: read
@@ -21,7 +21,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      name: Checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Node.js
@@ -42,8 +42,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Folder hasil build (biasanya 'dist' untuk Vite atau 'build' untuk CRA)
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-      
+        uses: actions/deploy-pages@v4
